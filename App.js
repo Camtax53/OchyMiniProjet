@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Platform, StatusBar, SafeAreaView, Text, FlatList,TouchableOpacity  } from "react-native";
 import { AppBar, ListItem } from "@react-native-material/core";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 
 
 const DATA = require('./DummyData.json');
@@ -12,20 +14,23 @@ const Item = ({name,email}) => (
     <Text style={styles.title}>{name}</Text>
     <Text style={styles.title}>{email}</Text>
     <TouchableOpacity onPress={handleIconClick} style={styles.iconContainer}>
-    <Icon name="straighten" size={30} color="white" style={styles.icon}/>
+    <MaterialIcons name="straighten" size={30} color="white" style={styles.icon}/>
       </TouchableOpacity>
   </View>
 );
 
 const ItemPending = ({name,email}) => (
-
+ 
   <View style={styles.itemPending }>
-    <View style={styles.textContainer}>
+    <View style={pending.columnContainer}>
+    <View style={pending.rowContainer}>
+    <AntDesign name="hourglass" size={20} color="purple" />  
       <Text style={pending.name}>{name}</Text>
-      <Text style={pending.email}>{email}</Text>
+    </View>
+    <Text style={pending.email}>{email}</Text>
     </View>
     <TouchableOpacity onPress={handleIconClick} style={styles.iconContainer}>
-      <Icon name="chevron-right" size={30} color="white" />
+      <MaterialIcons name="chevron-right" size={30} color="white" />
     </TouchableOpacity>
   </View>
 );
@@ -118,6 +123,15 @@ const pending = StyleSheet.create({
     color: 'rgba(255,255,255,0.5)',
     fontSize: 15,
     fontFamily: "Roboto",
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  columnContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 });
 
