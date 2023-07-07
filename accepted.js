@@ -2,6 +2,12 @@ import React from "react";
 import { StyleSheet, View,  Text,TouchableOpacity  } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  useFonts,
+  SpaceGrotesk_400Regular,
+} from "@expo-google-fonts/space-grotesk";
+
+
 
 const Item = ({name,email,height,weight}) => 
 {
@@ -15,6 +21,14 @@ const Item = ({name,email,height,weight}) =>
     inches = parts[1];
   }
 
+  let [fontsLoaded] = useFonts({
+    SpaceGrotesk_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <></>;
+  }
+
 return (
    
   <TouchableOpacity onPress={click} >  
@@ -25,7 +39,7 @@ return (
     <View style={ styles.rowContainer}> 
     {height && ( //s'affiche uniquement si la taille est renseignée
     <>
-      <MaterialIcons name="straighten" size={16} color="white" />
+      <MaterialIcons name="straighten" size={16} color="white" style={styles.ruler}/>
       <Text style={styles.numbers}>{feet}</Text>
       <Text style={styles.unit}>ft</Text>
       <Text style={styles.numbers}>{inches}</Text>
@@ -35,7 +49,7 @@ return (
   
   {weight && ( //s'affiche uniquement si le poids est renseigné
     <>
-      <Text style={styles.email}>・</Text>
+      <Text style={styles.email}> ・ </Text>
       <MaterialCommunityIcons name="weight" size={16} color="white" />
       <Text style={styles.numbers}>{weight}</Text>
       <Text style={styles.unit}>ibs</Text>
@@ -70,28 +84,32 @@ const styles = StyleSheet.create({
       name: {
         color: 'rgba(255, 255, 255, 1)',
         fontSize: 18,
-        fontFamily: "Roboto",
+        fontFamily: "SpaceGrotesk_400Regular",
       },
       email: {
         color: 'rgba(255,255,255,0.5)',
         fontSize: 15,
-        fontFamily: "Roboto",
+        fontFamily: "SpaceGrotesk_400Regular",
       },
       rowContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 5,
       },
+      ruler : {
+        transform: [{ rotate: '130deg' }],
+        paddingLeft: 2,
+      },
       numbers: {
         color: 'rgba(255,255,255,1)',
         fontSize: 15,
-        fontFamily: "Roboto",
+        fontFamily: "SpaceGrotesk_400Regular",
         paddingLeft: 2,
       },
       unit: {
         color: 'rgba(255,255,255,0.5)',
         fontSize: 16,
-        fontFamily: "Roboto",
+        fontFamily: "SpaceGrotesk_400Regular",
         paddingLeft: 2,
         marginBottom: -5,
       },

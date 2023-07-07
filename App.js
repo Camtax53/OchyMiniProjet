@@ -3,6 +3,12 @@ import { StyleSheet, View, Platform, StatusBar, SafeAreaView, Text, FlatList,Tou
 import { AppBar, ListItem } from "@react-native-material/core";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  useFonts,
+  SpaceGrotesk_400Regular,
+} from "@expo-google-fonts/space-grotesk";
+
+
 
 import Item from './accepted.js';
 import ItemPending from './pending.js';
@@ -10,7 +16,20 @@ const DATA = require('./DummyData.json');
 
 
 
-const App = () => (
+const App = () => 
+
+{
+
+  let [fontsLoaded] = useFonts({
+    SpaceGrotesk_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <></>;
+  }
+
+
+return (
   <SafeAreaView style={styles.AndroidSafeArea}>
       
     <AppBar
@@ -27,6 +46,7 @@ const App = () => (
     </SafeAreaView>
 
 );
+};
 
 const click = () => {
   console.log("Click !");
@@ -41,20 +61,15 @@ const styles = StyleSheet.create({
   },
   appBarTitle: {
     fontSize: 40, 
-    fontFamily: "sans-serif",
+    fontFamily: "SpaceGrotesk_400Regular",
     fontWeight: "bold",
   },
   title: {
     color: 'rgba(255, 255, 255, 1)',
     fontSize: 18,
-    fontFamily: "sans-serif",
+    fontFamily: "SpaceGrotesk_400Regular",
   },
   
-  icon: {
-    transform: [{ rotate: '150deg' }],
-    
-  },
-    
 });
 
 

@@ -2,8 +2,24 @@ import React from "react";
 import { StyleSheet, View,  Text, TouchableOpacity  } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {
+  useFonts,
+  SpaceGrotesk_400Regular,
+} from "@expo-google-fonts/space-grotesk";
 
-const ItemPending = ({name,email}) => (
+
+
+const ItemPending = ({name,email}) => {
+
+  let [fontsLoaded] = useFonts({
+    SpaceGrotesk_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <></>;
+  }
+
+return (
  
     <View style={styles.itemPending }>
       <View style={styles.columnContainer}>
@@ -18,6 +34,7 @@ const ItemPending = ({name,email}) => (
       </TouchableOpacity>
     </View>
   );
+};
 
   const styles = StyleSheet.create({
     itemPending: {
@@ -25,7 +42,7 @@ const ItemPending = ({name,email}) => (
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor:  'rgba(206,101,255,0.2)', 
-        padding: 15,
+        padding: 10,
         marginVertical: 4,
         marginHorizontal: 4,
         borderRadius: 10,
@@ -42,12 +59,12 @@ const ItemPending = ({name,email}) => (
       name: {
         color: 'rgba(206,101,255,1)',
         fontSize: 18,
-        fontFamily: "Roboto",
+        fontFamily: "SpaceGrotesk_400Regular",
       },
       email: {
         color: 'rgba(255,255,255,0.5)',
         fontSize: 15,
-        fontFamily: "Roboto",
+        fontFamily: "SpaceGrotesk_400Regular",
       },
       iconContainer: {
         position: 'absolute',
