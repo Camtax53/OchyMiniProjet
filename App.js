@@ -1,11 +1,9 @@
 import React from "react";
-import { StyleSheet, View, Platform, StatusBar, SafeAreaView, Text, FlatList,TouchableOpacity  } from "react-native";
-import { AppBar, ListItem } from "@react-native-material/core";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet, Platform, StatusBar, SafeAreaView, Text, FlatList, TouchableOpacity } from "react-native";
+import { AppBar } from "@react-native-material/core";
 import {
   useFonts,
-  SpaceGrotesk_400Regular,
+  SpaceGrotesk_700Bold,
 } from "@expo-google-fonts/space-grotesk";
 
 
@@ -16,12 +14,10 @@ const DATA = require('./DummyData.json');
 
 
 
-const App = () => 
-
-{
-
+const App = () => {
+  //importation de la police
   let [fontsLoaded] = useFonts({
-    SpaceGrotesk_400Regular,
+    SpaceGrotesk_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -29,39 +25,34 @@ const App = () =>
   }
 
 
-return (
-  <SafeAreaView style={styles.AndroidSafeArea}>
-      
-    <AppBar
-    title="Athletes"
-    titleStyle={styles.appBarTitle}
-    color="black"
-    tintColor="white" />
-    <FlatList
+  return (
+    <SafeAreaView style={styles.AndroidSafeArea}> 
+      <AppBar
+        title="Athletes"
+        titleStyle={styles.appBarTitle}
+        color="black"
+        tintColor="white" />
+      <FlatList
         data={DATA.users}
-        renderItem={({item}) => item.status === 'pending'? <ItemPending name={item.name} email={item.mail}  /> : <Item name={item.name} email={item.mail} height={item.height} weight={item.weight} />}
+        renderItem={({ item }) => item.status === 'pending' ? <ItemPending name={item.name} email={item.mail} /> : <Item name={item.name} email={item.mail} height={item.height} weight={item.weight} />}
         keyExtractor={item => item.name}
-        onPress={click}
       />
     </SafeAreaView>
 
-);
+  );
 };
 
-const click = () => {
-  console.log("Click !");
-};
 
 
 const styles = StyleSheet.create({
-  AndroidSafeArea: {
+  AndroidSafeArea: { //permet de ne pas avoir des elements qui seront cachés par la barre de status
     flex: 1,
     backgroundColor: "black",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
   appBarTitle: {
-    fontSize: 40, 
-    fontFamily: "SpaceGrotesk_400Regular",
+    fontSize: 40,
+    fontFamily: "SpaceGrotesk_700Bold",
     fontWeight: "bold",
   },
   title: {
@@ -69,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "SpaceGrotesk_400Regular",
   },
-  
+
 });
 
 
