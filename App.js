@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Platform, StatusBar, SafeAreaView, FlatList} from "react-native";
-import { AppBar } from "@react-native-material/core";
 import { useCustomFonts } from './assets/font.js';
 import ItemAccepted from './src/accepted.js';
 import ItemPending from './src/pending.js';
+import CustomAppBar from "./src/components/appBar.js";
 
 
 const DATA = require('./DummyData.json');
@@ -21,11 +21,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.AndroidSafeArea}> 
-      <AppBar
-        title="Athletes"
-        titleStyle={styles.appBarTitle}
-        color="black"
-        tintColor="white" />
+      <CustomAppBar />
       <FlatList
         data={DATA.users}
         renderItem={({ item }) => item.status === 'pending' ? <ItemPending name={item.name} email={item.mail} /> : <ItemAccepted name={item.name} email={item.mail} height={item.height} weight={item.weight} />}
