@@ -1,24 +1,18 @@
 import React from "react";
-import { StyleSheet, Platform, StatusBar, SafeAreaView, Text, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, Platform, StatusBar, SafeAreaView, FlatList} from "react-native";
 import { AppBar } from "@react-native-material/core";
-import {
-  useFonts,
-  SpaceGrotesk_700Bold,
-} from "@expo-google-fonts/space-grotesk";
+import { useCustomFonts } from './assets/font.js';
+import ItemAccepted from './src/accepted.js';
+import ItemPending from './src/pending.js';
 
 
-
-import Item from './accepted.js';
-import ItemPending from './pending.js';
 const DATA = require('./DummyData.json');
 
 
 
 const App = () => {
   //importation de la police
-  let [fontsLoaded] = useFonts({
-    SpaceGrotesk_700Bold,
-  });
+  const fontsLoaded = useCustomFonts();
 
   if (!fontsLoaded) {
     return <></>;
@@ -34,7 +28,7 @@ const App = () => {
         tintColor="white" />
       <FlatList
         data={DATA.users}
-        renderItem={({ item }) => item.status === 'pending' ? <ItemPending name={item.name} email={item.mail} /> : <Item name={item.name} email={item.mail} height={item.height} weight={item.weight} />}
+        renderItem={({ item }) => item.status === 'pending' ? <ItemPending name={item.name} email={item.mail} /> : <ItemAccepted name={item.name} email={item.mail} height={item.height} weight={item.weight} />}
         keyExtractor={item => item.name}
       />
     </SafeAreaView>

@@ -2,22 +2,11 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {
-  useFonts,
-  SpaceGrotesk_400Regular,
-} from "@expo-google-fonts/space-grotesk";
+import Email from './components/email.js';
 
 
 //Affichage des athlètes en attente
 const ItemPending = ({ name, email }) => {
-  //importation de la police
-  let [fontsLoaded] = useFonts({
-    SpaceGrotesk_400Regular,
-  });
-
-  if (!fontsLoaded) {
-    return <></>;
-  }
 
   return (
 
@@ -27,7 +16,7 @@ const ItemPending = ({ name, email }) => {
           <AntDesign name="hourglass" size={20} color="#CE65FF" />
           <Text style={styles.name}>{name}</Text>
         </View>
-        {email && <Text style={styles.email}>{email}</Text>}
+        <Email email={email} />
       </View>
       <TouchableOpacity onPress={click} style={styles.iconContainer}>
         <MaterialIcons name="chevron-right" size={30} color="white" />
