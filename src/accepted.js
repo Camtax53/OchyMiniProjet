@@ -1,17 +1,20 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useContext } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Email from './components/email.js';
 import Weight from "./components/weight.js";
 import Height from "./components/height.js";
+import { ColorContext } from "../App.js";
 
 const invert = require('invert-color');
 
 //Affichage des athlètes acceptés
 const ItemAccepted = ({ name, email, height, weight }) => {
   const isFirstRender = useRef(true);
-  const [buttonColor, setButtonColor] = useState('rgba(255, 255, 255, 0.1)');
+  const [buttonColor, setButtonColor] = useState('rgba(255,255,255,0.1)');
   const [textColor, setTextColor] = useState('#ffffff');
+  const { resetColor, setResetColor } = useContext(ColorContext);
+
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -21,6 +24,17 @@ const ItemAccepted = ({ name, email, height, weight }) => {
     setTextColor(invert(buttonColor));
 
   }, [buttonColor]);
+
+  useEffect(() => {
+    if (resetColor) {
+      setButtonColor('rgba(255,255,255,0.1)');
+      setTextColor('#ffffff');
+      setResetColor(false);
+      isFirstRender.current = true;
+    }
+  }, [resetColor]);
+
+
 
   const changeColor = useCallback(async () => {
     try {
@@ -86,11 +100,6 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    fontFamily: "SpaceGrotesk_400Regular",
-  },
-  email: {
-    color: 'rgba(255,255,255,0.5)',
-    fontSize: 15,
     fontFamily: "SpaceGrotesk_400Regular",
   },
   rowContainer: {
